@@ -1,0 +1,77 @@
+{% extends 'shop_app/base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'shop_app/css/assortment.css' %}">
+{% endblock links %}
+
+{% block content %}
+<h1>Assortment</h1>
+
+<div class="block-segments">
+    <div class="block-segments__item">
+        <h2 class="title-eco"><img src="{% static 'shop_app/img/assortment/segments-icons/eco.png' %}" alt="">Economy</h2>
+        <div class="list-brands">
+            {% for brand in eco_brands %}
+            <div class="list-brands__item">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                    <div class="list-brands__image">
+                    <img src="{{brand.image.url}}" alt="">
+                </div>
+                <p class="list-brands__brand-name">{{brand.name}}</p>
+                </a>
+            </div>
+            {% endfor %}   
+        </div>
+    </div>
+
+
+    <div class="block-segments__item">
+        <h2 class="title-premium"><img src="{% static 'shop_app/img/assortment/segments-icons/premium.png' %}" alt="">Premium</h2>
+        <div class="list-brands">
+            {% for brand in premium_brands %}
+            <div class="list-brands__item">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                    <div class="list-brands__image">
+                    <img src="{{brand.image.url}}" alt="">
+                </div>
+                <p class="list-brands__brand-name">{{brand.name}}</p>
+                </a>
+            </div>
+            {% endfor %}   
+        </div>
+    </div>
+
+
+    <div class="block-segments__item">
+        <h2 class="title-super-premium"><img src="{% static 'shop_app/img/assortment/segments-icons/premium.png' %}" alt="">Super premium</h2>
+        <div class="list-brands">
+            {% for brand in super_premium_brands %}
+            <div class="list-brands__item">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                    <div class="list-brands__image">
+                    <img src="{{brand.image.url}}" alt="">
+                </div>
+                <p class="list-brands__brand-name">{{brand.name}}</p>
+                </a>
+            </div>
+            {% endfor %}  
+        </div>
+    </div>
+</div>
+
+<form method="post" class="consultation-form-assortment-page">
+    {% csrf_token %}
+    <h2>Not sure what to choose?<p>Order a consultation!</p></h2>
+    <input type="text" hidden value="consultation" name="form_name">
+    <input type="tel" placeholder="Phone" name = "phone_number">
+    <input type="text" placeholder="How should we address you?" name = "client_name">
+    <input type="text" placeholder="Animal breed" name = "animal">
+    <input type="text" placeholder="Animal age" name = "age_of_animal">
+    <button type="submit">Call me back</button>
+</form>
+
+{% endblock content %}
+
+{% block scripts %}
+{% endblock scripts %} 

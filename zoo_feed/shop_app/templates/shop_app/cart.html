@@ -1,0 +1,197 @@
+{% extends 'shop_app/base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'shop_app/css/cart.css' %}">
+{% endblock links %}
+
+{% block content %}
+    {% csrf_token %}
+    <input type="text" value="{% url 'udpate_amount_prod_in_cart' %}" class="url-udpate-amount-prod-in-cart" hidden>
+    <input type="text" value="{% url 'del_prod_from_cart' %}" class="url-del-prod-from-cart" hidden>
+    <h1>Place an order</h1>
+    <div class="cart-wrapper">
+        <form class="client-form" method="post">
+            {% csrf_token %}
+            <input type="text" hidden name="form_name" value="order">
+            <h2>Recipient information</h2>
+            <div class="client-form__field">
+                <div class="input-label">First name</div>
+                <input type="text" name="name" maxlength="30" required>
+            </div>
+            <div class="client-form__field">
+                <div class="input-label">Last name</div>
+                <input type="text" name="surname" maxlength="30" required>
+            </div>
+            <div class="client-form__field">
+                <div class="input-label">Patronymic</div>
+                <input type="text" name="patronymic" maxlength="30" required>
+            </div>
+            <div class="client-form__field">
+                <div class="input-label">Phone</div>
+                <input type="tel" name='phone_number' required >
+            </div>
+            <div class="client-form__field">
+                <div class="input-label">Email</div>
+                <input type="email" name="email"  required>
+            </div>
+            <div class="client-form__field client-form__radio-buttons">
+                <div class="input-label">Delivery method</div>
+                <div class="radio-button">
+                    <input type="radio" id="nova-poshta" name="order-receiving" value="nova_poshta" required>
+                    <label for="nova-poshta">Nova Poshta</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="ukrposhta" name="order-receiving" value="ukrposhta" required>
+                    <label for="ukrposhta">Ukrposhta</label>
+                </div>
+                <div class="radio-button">
+                    <input type="radio" id="pickup" name="order-receiving" value="pickup" required> 
+                    <label for="pickup">Pickup</label>
+                </div>
+                <div class="nova-poshta-form order-receiving-form hidden">
+                    <div class="client-form__field">
+                        <div class="input-label">City</div>
+                        <input type="text" name="city" maxlength="30">
+                    </div>
+                    <div class="client-form__field">
+                        <div class="input-label">Department number</div>
+                        <input type="number" name="department_number">
+                    </div>
+                </div>
+
+                <div class="ukrposhta-form order-receiving-form hidden">
+                    <div class="client-form__field">
+                        <div class="input-label">Postal code</div>
+                        <input type="number" name="ukrposhta_index">
+                    </div>
+                </div>
+            </div>
+            <div class="client-form__field">
+                <div class="input-label">Order comment (optional)</div>
+                <textarea name="comment" cols="30" rows="10"></textarea>
+            </div>
+            <div class="client-form__field">
+                <input type="checkbox" required id="confirm-order">
+                <label for="confirm-order">Confirm the order</label>
+            </div>
+            <div class="client-form__field">
+                <input type="checkbox" required id="agreement">
+                <label for="agreement"><a href="{% url 'terms_of_use' %}" class="link_in_form">I agree to the user agreement</a></label>
+            </div>
+            <div class="button-buy-wrapper">
+                <input type="submit" value="Order" class="button-buy">
+            </div>
+        </form>
+        
+        <div class="products-in-cart">
+            <div class="products-wrapper">
+            {% if products_in_cart %}
+                {% for prod_in_cart in products_in_cart %}
+                    <div class="product">
+                        <div class="product__img"><img src="{{prod_in_cart.product.image.url}}" alt=""></div>
+                        <div class="product-information">
+                            <div class="product-information__top">
+                                <div class="product__vendor-code">Vendor code: {{prod_in_cart.product.vendor_code}}</div>
+                                <span class="delete-product" prod_in_cart_pk="{{prod_in_cart.pk}}"><ion-icon name="close-outline"></ion-icon></span>
+                            </div>
+                            <div class="product__name">
+                                {{prod_in_cart.product.name}}
+                            </div>
+                            <div class="product__packing">
+                                <button class="packing-list__item selected"><span>{{prod_in_cart.packing.weight}} kg</span></button>
+                            </div>
+                            <div class="product__amount">
+                                <button class="amount-minus change-amount">-</button>
+                                <input readonly type="number" class="amount-number" value="{{prod_in_cart.amount}}" prod_in_cart_pk="{{prod_in_cart.pk}}">
+                                <button class="amount-plus change-amount">+</button>
+                            </div>
+                            <div class="product__price">
+                                <div class="product__currently-price">{{prod_in_cart.get_full_current_price}} USD</div>
+                                {% if prod_in_cart.packing.old_price %}
+                                    <div class="product__old-price">{{prod_in_cart.get_full_old_price}} USD</div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                <div class="block-full-price">
+                    <span>Total:</span>
+                    <div class="product__currently-price">{{current_full_price}} USD</div>
+                    {% if old_full_price %}
+                    <div class="product__old-price">{{old_full_price}}  USD</div>
+                    {% endif %}
+                </div>
+                <div class="block-add-to-cart">
+                    <span>Would you like to add something?</span>
+                    <a href="{% url 'home' %}#choose-food">Go to catalog</a>
+                </div>
+            {% else %}
+            <div class="block-add-to-cart">
+                <span>Your cart is empty.</span>
+                <span>Would you like to add something?</span>
+                <a href="{% url 'home' %}#choose-food">Go to catalog</a>
+            </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="order-processed">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <h3>Thank you for your order!</h3>
+                <p>The receipt has been sent to your email.</p>
+                <p>Your order is being processed by a manager. Within 15-30 minutes they will contact you at <span class="phone-number">{{phone_number}}</span>.</p>
+                <a class='to-home' href="{% url  'home' %}">Back to home</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popup" id="cart-empty-error">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <h3>The cart is empty!</h3>
+                <p>Your order cannot be processed because you have not added any products to the cart.</p>
+                <a class='to-catalog' href="{% url 'home' %}#choose-food">Go to catalog</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popup" id="send-error">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <p><span>Unfortunately</span>, an error occurred while sending the order.</p>
+                <p>Please try again!</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+<script src="{% static 'shop_app/js/cart/delete_product.js' %}"></script>
+<script src="{% static 'shop_app/js/cart/amount_change.js' %}"></script>
+<script src="{% static 'shop_app/js/cart/set_order_receiving.js' %}"></script>
+
+{% if order_processed %}
+        <script defer>
+            const curentPopup = document.getElementById("order-processed");
+            popupOpen(curentPopup);
+        </script>
+    {% elif cart_empty_error %}
+        <script defer>
+            const curentPopup = document.getElementById("cart-empty-error");
+            popupOpen(curentPopup);
+        </script>
+    {% elif send_error %}
+        <script defer>
+            const curentPopup = document.getElementById("send-error");
+            popupOpen(curentPopup);
+        </script>
+{% endif %}
+{% endblock scripts %} 

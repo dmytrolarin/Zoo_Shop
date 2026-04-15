@@ -1,0 +1,124 @@
+{% extends 'shop_app/base.html' %}
+{% load static %}
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'shop_app/css/home.css' %}">
+{% endblock links %}
+
+{% block content %}
+    <div class="block-advert">
+        <div class="block-advert__text">
+            <h1>Zoo Feed</h1>
+            <p>The best choice of food for cats and dogs</p>
+            <a href="#choose-food" class="to-catalog">Choose food</a>
+        </div>
+        <div class="block-advert__slider">
+            <div class="sim-slider">
+                <ul class="sim-slider-list">
+                  <li><img src="https://images.pexels.com/photos/8434725/pexels-photo-8434725.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="Dog eating food from a bowl"></li> 
+                  <li class="sim-slider-element"><img src="https://pet-health-content-media.chewy.com/wp-content/uploads/2025/10/10154356/Best-Dog-Food-Chewy-Buying-Guide-Hero-1024x576.jpg" alt="Selection of premium dog food packages"></li>
+                  <li class="sim-slider-element"><img src="https://www.thehonestkitchen.com/cdn/shop/collections/THK.com_CollectionPages_Images_Dog-ShopAll.png?v=1758304642" alt="Healthy dog food products from the Honest Kitchen"></li>
+                  <li class="sim-slider-element"><img src="https://www.lilyskitchen.com/cdn/shop/files/de_hp_mainbanner_pack_mobile_2024_8a930cd8-08a5-43e6-baa7-08f1914a79e4.png?v=1733741922&width=3000" alt="Lily's Kitchen pet food packaging banner"></li>   
+                </ul>
+                <div class="sim-slider-arrow-left"></div>
+                <div class="sim-slider-arrow-right"></div>
+                <div class="sim-slider-dots"></div>
+              </div>
+        </div>
+        
+        
+    </div>
+        <div class="choose-food" id="choose-food">
+            <h2>What food do you need?</h2>
+            <div class="choose-food__container">    
+                <a href="{% url 'assortment' %}?type_of_products=dog_food" class="choose-food__dogs">
+                    <img class="choose-food__img" src="{% static  'shop_app/img/home/dog.png' %}" alt="">
+                    <p>Dog food</p>
+                </a>
+
+                <a href="{% url 'assortment' %}?type_of_products=cat_food" class="choose-food__cats">
+                    <img class="choose-food__img" src="{% static  'shop_app/img/home/cat.png' %}" alt="">
+                    <p>Cat food</p>
+                </a>
+            </div>
+        </div>
+
+        <div class="another-assortment">
+            <h2>Other assortment:</h2>
+            <div class="another-assortment__buttons">
+                <a href="{% url 'assortment' %}?type_of_products=wet_food">Wet food</a>
+                <a href="{% url 'assortment' %}?type_of_products=care_and_hygiene">Care and hygiene</a>
+            </div>
+        </div>
+
+        <div class="reviews">
+            <h2>Reviews from our clients</h2>
+            <div class="reviews__container">
+                <div class="reviews__item">
+                    <div class="client__avatar">
+                        <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" >
+                    </div>
+                    <div class="client-name">Oleksandr</div>
+                    <div class="review-text">
+                        I sincerely thank this seller and the whole store team. Everything was arranged at the highest level and delivered on time. We will continue working with this store. Wishing you all success. Thank you very much!
+                    </div>
+                </div>
+
+                <div class="reviews__item">
+                    <div class="client__avatar">
+                        <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" >
+                    </div>
+                    <div class="client-name">Oleh</div>
+                    <div class="review-text">
+                        I am buying from this website for the third time. Everything happens very quickly: ordered, paid, shipped, received. The product is always in stock. Everything is fast, clear, and without unnecessary communication. I will keep ordering food on this site. Thank you!
+                    </div>
+                </div>
+
+                <div class="reviews__item">
+                    <div class="client__avatar">
+                        <img src="https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png" alt="" >
+                    </div>
+                    <div class="client-name">Yuliia</div>
+                    <div class="review-text">
+                        Hello! I ordered dry cat food on this site and I am very satisfied with the purchase because the product arrived very quickly despite the martial law in the country, and the packaging was in good condition. Thank you, I will order again!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <span id="review"></span>
+        <form method="post" class="review-form">
+            {% csrf_token %}
+            <h2>Have your own opinion about our work? Share it with us!</h2>
+            <input type="text" hidden value="review" name="form_name">
+            <input type="text" name="client_name" id="" placeholder="Your name" required>
+            <input type="email" name="client_email" id="" placeholder="Your e-mail" required>
+            <textarea name="impression" id="" cols="30" rows="10" placeholder="Your impression" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="popup" id="popup-success">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <p><span>Thank you!</span> Your review has been sent successfully.</p>
+                <p>We will definitely get back to you shortly.</p>
+            </div>
+        </div>
+    </div>
+    <div class="popup" id="popup-failure">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <p><span>Unfortunately</span>, an error occurred while sending the review.</p>
+                <p>Please try again!</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'shop_app/js/home/slider.js' %}"></script>
+    <script src="{% static 'shop_app/js/base/smooth_scroll.js' %}"></script>
+{% endblock scripts %} 

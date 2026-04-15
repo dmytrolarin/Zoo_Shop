@@ -1,0 +1,190 @@
+{% extends 'shop_app/base.html' %}
+{% load static %}
+{% load index %}
+
+
+{% block links %}
+<link rel="stylesheet" href="{% static 'shop_app/css/products.css' %}">
+{% endblock links %}
+
+{% block content %}
+    <div class="top-block">
+        <h1>{{type_of_products}}</h1>
+        <img class="top-block__img" src="{{type_of_products.image.url}}" alt="">
+    </div>
+   
+
+    <button class="button-filters">
+        <img src="{% static 'shop_app/img/products/icons/filter.png' %}">
+    </button>
+
+    <div class="screen-background" onclick="setPackingsList(),setAmountButtonsList()"></div>
+    
+    <div class="filters"> 
+        <div class="filters__top" onclick="setPackingsList(),setAmountButtonsList()">
+            <span>Filters</span>  <button class="filter-close-icon"><ion-icon name="chevron-back-outline"></ion-icon></button>
+        </div>
+        <div class="filters__body">
+            <div class="filters__products-types">
+                <span class="selected">Dog food</span>
+                <a>Cat food</a>
+                <a>Wet food</a>
+                <a>Care and hygiene</a>
+            </div>
+            <div class="filters__parametres">
+                {% for fg in filter_groups %}
+                        <div class="parameter">
+                            <span class="parameter-title">{{ fg.title }}</span>
+                            {% for fi in filter_items|index:forloop.counter0 %}
+                                {% if filters_applied %}
+                                    {% if fi.pk in filters_ids %}
+                                        <a href="{{current_url}}" class="parameter-item canel-filter-item" filter_item_pk = {{fi.pk}}>
+                                    {% else %}
+                                        <a href="{{current_url}}" filter_item_pk ="{{fi.pk}}" class="parameter-item apply-filter-item">
+                                    {% endif %}
+                                {% else %}
+                                    <a href="{{current_url}}&filters={{fi.pk}}" class="parameter-item apply-filter-item ">
+                                {% endif %}
+                                    <span class="icon">
+                                        {% if fi.pk in filters_ids %}
+                                            <span class="checkmark checked selected"><ion-icon name="checkbox-outline"></ion-icon></span>
+                                            <span class="checkmark"><ion-icon name="square-outline"></ion-icon></span>
+                                        {% else %}
+                                            <span class="checkmark selected"><ion-icon name="square-outline"></ion-icon></span>
+                                            <span class="checkmark checked"><ion-icon name="checkbox-outline"></ion-icon></span>
+                                        {% endif %}
+                                    </span>
+                                    <span>{{ fi.name }}</span>
+                                </a>
+                            {% endfor %}
+                        </div>    
+                {% endfor %}
+            </div>
+            <div class="filters__price">
+                <span>Price</span>
+                <div class="inputs-prices">
+                    from <input class="price-min" type="number" name="" id="" value="{{min_price}}">
+                    to <input class="price-max" type="number" name="" id="" value="{{max_price}}"> USD
+                </div>
+                <div class="slider">
+                    <div class="progress"></div>
+                </div>
+                <div class="range-input">
+                    <input type="range" class="range-min" min="{{absolute_min_price}}" max="{{absolute_max_price}}" value="{{min_price}}">
+                    <input type="range" class="range-max" min="{{absolute_min_price}}" max="{{absolute_max_price}}" value="{{max_price}}">
+                </div>
+                <a href="{{current_url}}" class = "filters__price-button">OK</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="products-wrapper">
+        <div class="list-products"> 
+            {% for product in products %}
+                <div class="product">
+                    <a href="{{product.get_absolute_url}}" class="product-top">
+                        <div class="product__img"><img src="{{product.image.url}}" alt=""></div>
+                        <div class="product__vendor-code">Vendor code: {{product.vendor_code}}</div>
+                        <div class="product__name">{{product.name}}</div>
+                    </a>
+                    <div class="product__bottom">
+                        <div class="product__packing">
+                            <span>Packing</span>
+                            <div class="packing-list">
+                                    {% for prod_packing in product_packings|index:forloop.counter0 %}
+                                        {% if prod_packing.old_price %}
+                                            {% if forloop.counter0 == 0 %}
+                                                <button packing_pk="{{prod_packing.pk}}" class="packing-list__item stock selected" current_price="{{prod_packing.current_price}}" old_price = "{{prod_packing.old_price}}"><span>{{prod_packing.weight}} kg</span></button>
+                                            {% else %}
+                                                <button packing_pk="{{prod_packing.pk}}" class="packing-list__item stock" current_price="{{prod_packing.current_price}}" old_price = "{{prod_packing.old_price}}"><span>{{prod_packing.weight}} kg</span></button>
+                                            {% endif %}
+                                        {% else %}
+                                            {% if forloop.counter0 == 0 %}
+                                                <button packing_pk="{{prod_packing.pk}}" class="packing-list__item selected" current_price="{{prod_packing.current_price}}" old_price = "none"><span>{{prod_packing.weight}} kg</span></button>
+                                            {% else %}
+                                                <button packing_pk="{{prod_packing.pk}}" class="packing-list__item" current_price="{{prod_packing.current_price}}" old_price = "none"><span>{{prod_packing.weight}} kg</span></button>
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
+                            </div>
+                        </div>
+                        <div class="product__price">
+                            {% with packings_for_this_prod=product_packings|index:forloop.counter0 %} 
+                                {% with first_packing=packings_for_this_prod.0 %}
+                                    <div class="product__currently-price">{{first_packing.current_price}} USD</div>
+                                    {% if first_packing.old_price %}
+                                        <div class="product__old-price">{{first_packing.old_price}} USD</div>
+                                    {% else %}
+                                        <div class="product__old-price"></div>
+                                    {% endif %}
+                                {% endwith %}
+                            {% endwith %}
+                        </div>
+
+                        <form class="product__buy" action="{% url 'add_product_to_cart' %}">
+                            {% csrf_token %}
+                            <input type="text" class="product-pk" hidden value="{{product.pk}}">
+                            <div class="product__amount">
+                                <button class="amount-minus" type="button">-</button>
+                                <input type="number" class="amount-number" value="1" readonly>
+                                <button class="amount-plus" type="button">+</button>
+                            </div>
+                            <a class="product__button-in-cart">
+                                <ion-icon name="cart-outline"></ion-icon>
+                            </a>
+                        </form>
+                        <div class="list__marks">
+                            {% if list_stocks|index:forloop.counter0 == 'stock' %}
+                                <div class="mark-stock list__marks-item">Sale</div>
+                            {% endif %}
+                            {% if product.is_hit %}
+                                <div class="mark-hit list__marks-item">HIT</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}            
+        </div>
+    </div>
+
+<form method="post" class="consultation-form-products-page">
+    {% csrf_token %}
+    <h2>Not sure what to choose?<p>Order a consultation!</p></h2>
+    <input type="text" hidden value="consultation" name="form_name">
+    <input type="tel" placeholder="Phone" name = "phone_number" required>
+    <input type="text" placeholder="How should we address you?" name = "client_name" required>
+    <input type="text" placeholder="Animal breed" name = "animal" required>
+    <input type="text" placeholder="Animal age" name = "age_of_animal" required>
+    <button type="submit">Call me back</button>
+</form>
+
+<div class="popup" id="popup-added-to-cart">
+    <div class="popup__body">
+        <div class="popup__content">
+            <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+            <h3>The product was successfully added to the cart!</h3>
+            <img class='checkmark-img' src="{% static 'shop_app/img/products/checkmark.png' %}" alt="">
+            <div class="buttons">
+                <a href="#" class="close-popup stay">Stay here</a>
+                <a href="{% url 'cart' %}" class="to-cart">Go to cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'shop_app/js/products/filter.js' %}"></script>
+<script src="{% static 'shop_app/js/products/packing_switching.js' %}"></script>
+<script src="{% static 'shop_app/js/products/amount_change.js' %}"></script>
+<script src="{% static 'shop_app/js/products/filter_checkmark.js' %}"></script>
+<script src="{% static 'shop_app/js/products/apllying_filters.js' %}"></script>
+<script src="{% static 'shop_app/js/products/cancel_filters.js' %}"></script>
+<script src="{% static 'shop_app/js/products/set_location.js' %}"></script>
+<script src="{% static 'shop_app/js/products/set_price_range.js' %}"></script>
+<script src="{% static 'shop_app/js/products/range_slider.js' %}"></script>
+<script src="{% static 'shop_app/js/products/add_to_cart.js' %}"></script>
+{% endblock scripts %} 

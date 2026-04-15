@@ -1,0 +1,254 @@
+h1, h2{
+    font-family: 'Comfortaa-Bold';
+}
+
+h1{
+    background-color: #ffb824;
+    font-size: 32px;
+    width: 350px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: white;
+    margin: 0 auto;
+}
+
+/* Brand segment block */
+.block-segments{
+    margin-top: 90px;
+}
+
+.block-segments__item{
+    margin-top: 70px;
+}
+.block-segments__item h2{
+    color: black;
+    font-size: 22px;
+    width: fit-content;
+    margin: 10px auto;
+}
+
+.block-segments__item h2 img{
+    width: 40px;
+    margin-right: 13px;
+    position: relative;
+    bottom: 13px;
+    
+}
+
+
+
+.block-segments__item .title-super-premium{
+    background-color: #ffb824;
+    padding: 2px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    margin-bottom:36px;
+
+}
+
+.block-segments__item .title-super-premium img{
+    bottom: 0px;
+}
+
+.list-brands{
+    max-width: 1180px;
+    margin: 20px auto 0 auto;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 15px;
+    justify-content: space-between;
+ 
+}
+
+.list-brands__item{
+    margin-bottom: 10px;
+}
+
+.list-brands__item a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.list-brands__image{
+    width: 225px;
+    height: 225px;
+    background-color: white;
+    border: 5px solid #2b9c98;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+   
+}
+
+.list-brands__image img{
+    width:80%
+}
+
+.list-brands__brand-name{
+    color: #1e6b7d;
+    margin-top: 15px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* Consultation form */
+.consultation-form-assortment-page{
+    background-color: white;
+    max-width: 600px;
+    height: 500px;
+    margin: 90px auto 0 auto;
+    border: #4d9898 8px solid;
+    box-shadow: 0px 0px 5px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-around;  
+  }
+  
+  .consultation-form-assortment-page h2, .consultation-form-assortment-page p{
+    font-size: 28px;
+    color: black;
+    text-align: center;
+  }
+
+  .consultation-form-assortment-page p{
+    margin-bottom: 0;
+  }
+  .consultation-form-assortment-page h2{
+    line-height: 35px;
+  }
+  
+  .consultation-form-assortment-page input{
+    border-bottom: 1px gray solid;
+    width: 80%;
+    font-size: 18px;
+  }
+  
+  .consultation-form-assortment-page textarea{
+    border: 1px gray solid;
+    width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    resize: none;
+    height: 120px;
+  }
+  
+  .consultation-form-assortment-page button{
+    width: 170px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fbb73b;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .consultation-form-assortment-page button:hover{
+    background-color: #fac768;
+  
+}
+
+
+/* Successful submission popup */
+#popup-success p span{ 
+    color: green;
+    font-size: 22px;
+}
+  
+/* Failed submission popup */
+#popup-failure p span{ 
+color: red;
+font-size: 22px;
+}
+
+
+/* Shared popup styles */
+#popup-failure p, #popup-success p{
+margin: 10px 0;
+font-size: 16px;
+text-align: center;
+}
+
+@media (max-width:999px){
+    .list-brands{
+        grid-template-columns: auto auto auto;
+        justify-content: space-evenly;
+    }
+  
+}
+
+
+@media (max-width:767px){
+    .list-brands{
+        grid-template-columns: auto auto;
+    }
+
+    .list-brands{
+        gap: 10px;
+    }
+
+    .consultation-form-assortment-page textarea, .consultation-form-assortment-page input{
+        width: 100%; 
+    }
+
+    .consultation-form-assortment-page h2, .consultation-form-assortment-page h2 p{
+        font-size: 22px;
+    }
+
+    .consultation-form-assortment-page h2{
+        line-height: 27px;
+    }
+
+}
+@media (max-width:479px){
+
+    .list-brands__image{
+        width: 165px;
+        height: 165px;
+    }
+
+    .list-brands__brand-name{
+        margin-top: 8px;
+        font-size: 16px;
+    }
+
+    h1{
+        font-size: 28.5px;
+        width: 260px;
+        height: 40px;
+    }
+
+    .block-segments__item h2{
+        font-size: 17px;
+    }
+
+    .block-segments__item h2 img{
+        width: 31px;
+        margin-right: 10px;
+        bottom: 10px;
+        
+    }
+    
+
+}
+
+
+@media (max-width:359px){
+    .list-brands__image{
+        width: 120px;
+        height: 120px;
+    }
+    .list-brands{
+        gap: 5px;
+    }
+
+}

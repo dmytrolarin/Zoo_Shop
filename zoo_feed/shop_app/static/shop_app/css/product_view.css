@@ -1,0 +1,398 @@
+.product-block{
+  width: 100%;
+  background-color: white;
+  padding: 30px;
+  border: 4px #4d9898 solid;
+  border-radius: 35px;
+  font-family: 'Comfortaa-Bold';
+}
+.top-block{
+  display: flex;
+  align-items: center;
+}
+
+.top-block__item{
+  margin-right: 20px;
+}
+
+.marks-item{
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+    font-weight: 700;
+    border-radius: 10px;
+    width: fit-content;
+    font-family: 'Roboto', sans-serif;
+}
+
+.mark-stock{
+    background-color: #ff3f3f;   
+}
+
+.mark-hit{
+    background-color: #ffb824;
+}
+
+.product__name{
+  color: black;
+  font-size: 22px;
+  margin-top: 15px;
+
+}
+
+.center-block{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  height: 250px;
+  margin-bottom: 30px;
+}
+
+.product__img{
+  height: 250px;
+  /* text-align: center; */
+  margin-bottom: 30px;
+  max-width: 250px;
+}
+
+.product__img img{
+  height: 100%;
+}
+
+.center-block__main-info{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 250px;
+  margin-bottom: 30px;
+}
+
+.in-stock{
+  color: #01aec9;
+  font-size: 16px;
+}
+
+.not-in-stock{
+  color: red;
+  font-size: 16px;
+}
+
+
+.packing-list{
+  margin-top: 5px;
+  display: flex;
+}
+
+.packing-list__item{
+  font-family: 'Comfortaa-Bold';
+  border-radius: 10px;
+  border: 2px #0092aa solid;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  margin-right:  3px; 
+  white-space: nowrap;
+  background-color: white;
+}
+
+.packing-list__item.selected{
+  background-color: #0092aa;
+  color: white;
+}
+
+.packing-list__item.stock{
+  border-color: #ff3f3f;
+  
+}
+
+.packing-list__item.stock.selected{
+  background-color: #ff3f3f;
+  color: white;
+}
+
+.product__price{
+  color: #4d9898;
+  display: flex;
+}
+.product__price div{
+  margin-right: 20px;
+  font-family: 'Comfortaa-Bold';
+  font-size: 18px;
+}
+
+.product__old-price{
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.product__amount{
+  display: flex;
+  width: 85px;
+  height: 30px;
+  border: 2px #0092aa solid;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5px;
+  border-radius: 5px;
+ 
+}
+.amount-number{
+  width: 40px;
+  text-align: center;
+  color: gray;
+  font-size: 16px;
+}
+
+.product__amount button{
+  color: gray;
+  background-color: white;
+  font-size: 18px;
+}
+
+.product__button-in-cart{
+  background-color: #fbb73b;
+  transition: background-color 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 115px;
+  height: 35px;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.product__button-in-cart:hover{
+  background-color: #fac768;
+}
+.characteristic{
+  margin-bottom: 30px;
+}
+
+.characteristic h3{
+  font-size: 16px;
+  color: black;
+  margin-bottom: 20px;
+}
+
+.characteristic__list{
+
+  display: flex;
+
+}
+
+
+.characteristic__titles,
+.characteristic__parameters{
+  display: flex;
+  flex-direction: column;
+}
+
+.characteristic__titles{
+  margin-right: 20px;
+}
+
+.characteristic__titles span,
+.characteristic__parameters span{
+  margin-bottom: 10px;
+}
+
+.characteristic__titles span{
+  color: black;
+}
+
+
+
+/* Consultation form */
+.consultation-form-products-page{
+    background-color: white;
+    max-width: 600px;
+    height: 500px;
+    margin: 90px auto 0 auto;
+    border: #4d9898 8px solid;
+    box-shadow: 0px 0px 5px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 20px;
+    justify-content: space-around;  
+  }
+  
+  .consultation-form-products-page h2, .consultation-form-products-page p{
+    font-size: 28px;
+    color: black;
+    text-align: center;
+  }
+
+  .consultation-form-products-page p{
+    margin-bottom: 0;
+  }
+  .consultation-form-products-page h2{
+    line-height: 35px;
+  }
+  
+  .consultation-form-products-page input{
+    border-bottom: 1px gray solid;
+    width: 80%;
+    font-size: 18px;
+  }
+  
+  .consultation-form-products-page textarea{
+    border: 1px gray solid;
+    width: 80%;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    resize: none;
+    height: 120px;
+  }
+  
+  .consultation-form-products-page button{
+    width: 170px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fbb73b;
+    font-size: 18px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .consultation-form-products-page button:hover{
+    background-color: #fac768;
+  
+}
+
+/* Successful submission popup */
+#popup-success p span{ 
+    color: green;
+    font-size: 22px;
+}
+  
+/* Failed submission popup */
+#popup-failure p span{ 
+color: red;
+font-size: 22px;
+}
+
+
+/* Shared popup styles */
+#popup-failure p, #popup-success p{
+margin: 10px 0;
+font-size: 16px;
+text-align: center;
+}
+
+#popup-added-to-cart h3{
+  font-size: 24px;
+  text-align: center;
+}
+
+#popup-added-to-cart .checkmark-img{
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 20px auto 0 auto;
+}
+
+#popup-added-to-cart .buttons{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+#popup-added-to-cart .buttons a{
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer; 
+  margin:  0 3px; 
+  white-space: nowrap;
+  color: white;
+  height: 30px;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+  border-radius: 5px;
+}
+
+#popup-added-to-cart .buttons .stay{
+  background-color: #0092aa;
+}
+
+#popup-added-to-cart .buttons .to-cart{
+  background-color: #ffb824;
+}
+
+#popup-added-to-cart .buttons .stay:hover{
+  background-color: #00b2cd;
+}
+
+#popup-added-to-cart .buttons .to-cart:hover{
+  background-color: #fac768;
+}
+
+
+@media (max-width:999px){
+  
+  .center-block{
+    flex-wrap: wrap;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  
+
+}
+
+
+@media (max-width:767px){
+    .consultation-form-products-page textarea, .consultation-form-products-page input{
+        width: 100%; 
+    }
+
+    .consultation-form-products-page h2, .consultation-form-products-page h2 p{
+        font-size: 22px;
+    }
+
+    .consultation-form-products-page h2{
+        line-height: 27px;
+    }
+
+    
+
+}
+
+@media (max-width:479px){
+  .product-block{
+    padding: 17px;
+  }
+
+  .top-block{
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .top-block__item{
+    margin: 0 0 10px 0;
+  }
+
+  .top-block__item:last-child{
+    margin-bottom: 0;
+  }
+
+  .product__name{
+    font-size: 20px;
+  }
+}
+
+@media (max-width:319px){
+  .product-block{
+    padding: 5px;
+    border-radius: 20px;
+  }
+
+
+}

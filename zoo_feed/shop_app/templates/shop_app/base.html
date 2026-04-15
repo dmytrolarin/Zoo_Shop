@@ -1,0 +1,271 @@
+{% load static %}
+{% load basetags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'shop_app/css/base.css' %}">
+    <link rel="shortcut icon" href="{% static 'shop_app/img/base/logo.png' %}" type="image/png">
+    {% block links %}
+    {% endblock links %}
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header lock-padding" id="header" >
+            <div class="container">
+                <div class="header__body">
+                    <a href="{% url 'home' %}" class="header__logo">
+                        <img src="{% static 'shop_app/img/base/logo.png' %}" alt="">
+                    </a>
+                
+                    <div class="header__burger">
+                        <span></span>
+                    </div>
+                    <nav class="header__menu">
+                        <ul class="header__list">
+                            <li>
+                                <a href="{% url 'home' %}#choose-food" class="header__link nav-link">Catalog</a>
+                            </li>
+                            <li>
+                                <a href="{% url 'home' %}#review" class="header__link nav-link">Review</a>
+                            </li>
+                            <li>
+                                <a target="_blank" href="https://goo.gl/maps/y5iUL6Vx2BFhC1uEA" class="header__link">Location</a>
+                            </li>
+                            <li>
+                                <span popup-id="popup-payment-and-delivery" class="header__link popup-link">Payment and delivery</span>
+                            </li>
+                            <li>
+                                <span popup-id="popup-contacts" class="header__link popup-link">Contacts</span>
+                            </li>
+                            <li>
+                                <span popup-id="popup-consultation"  class="header__link popup-link">Consultation</span>
+                            </li>
+                            <li>
+                                <ion-icon name="call-outline" class="phone_icon"></ion-icon>
+                                <div class="header__phone-number">
+                                    <a href="tel:+380939330706" class="header__link">+380939330706</a>
+                                </div>
+                            </li> 
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="container">
+                <a href="{% url 'cart' %}" class="link-cart">
+                    <span class="cart-image"><ion-icon name="cart-outline"></ion-icon></span>
+                    <span class="prod-amount-in-cart">{% get_amount_prod_in_cart %}</span>
+                </a>
+                {% block content %}
+                
+                {% endblock content %}
+            </div>   
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer__body">
+                    <div class="footer__left">
+                        <a href="{% url 'home' %}" class="footer__logo">
+                            <img src="{% static 'shop_app/img/base/logo.png' %}" alt="">
+                        </a>
+                        <div>
+                            <a href="{% url 'contract_offer' %}">Offer agreement</a>
+                        </div>
+                        <div>
+                            <a href="{% url 'terms_of_use' %}">User agreement</a>
+                        </div>   
+                        <div class="copyright">© All rights reserved</div> 
+                    </div>
+
+                    <ul class="footer__list">
+                        <li>
+                            <ion-icon name="location-outline"></ion-icon>
+                            <a href="#">Dnipro, 3 Vyrobnycha St.</a>
+                        </li>
+                        <li>
+                            <ion-icon name="time-outline"></ion-icon>
+                            <span>
+                                <span>Working hours: Mon-Fri, 9:00-18:00</span> 
+                            </span>
+                        </li>
+                        <li>
+                            <ion-icon name="cube-outline"></ion-icon>
+                            <span>Shipping schedule: Mon-Fri, 9:00-15:00</span> 
+                        </li>
+                        <li>
+                            <ion-icon name="mail-outline"></ion-icon>
+                            <span>Partnership email: zoofeedkompani@gmail.com</span>
+                        </li>
+                        <li>
+                            <ion-icon name="call-outline" class="phone_icon"></ion-icon>
+                            <a href="tel:+380939330706" >+380939330706</a>
+                        </li>
+                    </ul>
+                    <div class="footer__social-networks">
+                        <span class="title">
+                            We are on social media
+                        </span>
+                        <div class="logos">
+                            <a target="_blank" href="https://www.facebook.com/korm.amigobest"><ion-icon name="logo-facebook"></ion-icon></a>
+                            <a target="_blank" href="https://t.me/amigobest_korm_ua"><img src="{% static 'shop_app/img/base/telegram.png' %}" alt=""></a>
+                            <a target="_blank" href="https://invite.viber.com/?g2=AQAzgyq8ZpKe6k%2FO43fyeLbhfO1En49YZtkJyI%2F%2Bdl0Nz%2FD5MKKUcrkLqyiswEAf"><img src="{% static 'shop_app/img/base/viber.png' %}" alt=""></a>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <div class="popup" id="popup-consultation">
+            <div class="popup__body">
+                <div class="popup__content">
+                    <div class="consultation-form">
+                        <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                        <h6>Have questions?</h6>
+                        <p>Fill out the short form and we will call you back shortly.</p>
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <input type="text" hidden value="consultation" name="form_name">
+                            <div>
+                                <span class="label">Your name</span>
+                                <input class="input-field" type="text"  id="" name="client_name" required>
+                            </div>
+                            <div>
+                                <span class="label">Phone number</span>
+                                <input type="tel"  class="phone-number-field input-field" value="+380" name='phone_number' required>
+                            </div>
+                            <div>
+                                <span class="label">Animal breed</span>
+                                <input type="text"  class="input-field" value="" name='animal' required>
+                            </div>
+                            <div>
+                                <span class="label">Animal age</span>
+                                <input type="text"  class="input-field" value="" name="age_of_animal" required>
+                            </div>
+                            <input type="submit" value="Send" class="button">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="popup-payment-and-delivery">
+            <div class="popup__body">
+                <div class="popup__content popup-payment-and-delivery">
+                    <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                    <div class="delivery">
+                        <h6>Delivery</h6>
+                        <ul class="delivery__list">
+                            <li>   
+                                <span><img src="{% static 'shop_app/img/base/ukrposhta-logo.png' %}" alt="">Ukrposhta delivery (paid)</span>
+                            </li>
+                            <li>
+                                
+                                <span><img src="{% static 'shop_app/img/base/novaposhta-logo.png' %}" alt="">Nova Poshta delivery (paid)</span>
+                            </li>
+                            <li>
+                                <span><ion-icon name="cart-outline"></ion-icon>Pickup</span> 
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="payment">
+                        <h6>Payment</h6>
+                        <div class="payment__text">
+                            <ion-icon name="cash-outline"></ion-icon>Payment by bank details or cash in case of pickup
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="popup-contacts">
+            <div class="popup__body">
+                <div class="popup__content">
+                    <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                    <h6>Contacts</h6> 
+                    <ul class="list__contacts">
+                        <li>
+                            <ion-icon name="call-outline" class="phone_icon"></ion-icon>
+                            <div class="phone_numbers">
+                                <a href="tel:+380939330706" class="header__link phone_number">+380939330706</a>
+                            </div>
+                        </li>
+
+                        <li> 
+                            <span><ion-icon name="mail-outline"></ion-icon>zoofeedkompani@gmail.com</span>
+                        </li>
+                        <li>
+                            <div class="popup__social-networks">
+                                <span class="title">
+                                    We are on social media
+                                </span>
+                                <div class="logos">
+                                    <a target="_blank" href="https://www.facebook.com/korm.amigobest"><ion-icon name="logo-facebook"></ion-icon></a>
+                                    <a target="_blank" href="https://t.me/amigobest_korm_ua"><img src="{% static 'shop_app/img/base/telegram.png' %}" alt=""></a>
+                                    <a target="_blank" href="https://invite.viber.com/?g2=AQAzgyq8ZpKe6k%2FO43fyeLbhfO1En49YZtkJyI%2F%2Bdl0Nz%2FD5MKKUcrkLqyiswEAf"><img src="{% static 'shop_app/img/base/viber.png' %}" alt=""></a>
+                                </div>  
+                            </div>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popup" id="popup-success">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <p><span>Success!</span> Your consultation request has been sent.</p>
+                <p>We will contact you shortly.</p>
+            </div>
+        </div>
+    </div>
+    
+    
+   
+    <div class="popup" id="popup-failure">
+        <div class="popup__body">
+            <div class="popup__content">
+                <a href="#" class="popup__close close-popup"><ion-icon name="close-outline"></ion-icon></a>
+                <p><span>Unfortunately</span>, an error occurred while sending the consultation request.</p>
+                <p>Please try again!</p>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <script src="{% static 'shop_app/js/base/burger_menu.js' %}"></script>
+    <script src="https://unpkg.com/imask"></script>
+    <script src="{% static 'shop_app/js/base/imask_init.js' %}"></script>
+    <script src="{% static 'shop_app/js/base/popup.js' %}"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    {% if is_sending_success == True %}
+        <script defer>
+            const curentPopup = document.getElementById("popup-success");
+            popupOpen(curentPopup);
+        </script>
+    {% elif is_sending_success == False %}
+        <script defer>
+            const curentPopup = document.getElementById("popup-failure");
+            popupOpen(curentPopup);
+        </script>
+    {% endif %}
+
+    {% block scripts %}
+
+    {% endblock scripts %} 
+</body>
+</html>
