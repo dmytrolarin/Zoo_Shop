@@ -6,7 +6,7 @@
 {% endblock links %}
 
 {% block content %}
-<h1>Assortment</h1>
+<h1>{{type_of_products.name}} Assortment</h1>
 
 <div class="block-segments">
     <div class="block-segments__item">
@@ -14,13 +14,15 @@
         <div class="list-brands">
             {% for brand in eco_brands %}
             <div class="list-brands__item">
-                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products.url_name}}&brand={{brand.name}}">
                     <div class="list-brands__image">
                     <img src="{{brand.image.url}}" alt="">
                 </div>
                 <p class="list-brands__brand-name">{{brand.name}}</p>
                 </a>
             </div>
+            {% empty %}
+                <p class="list-brands__brand-name">No brands available in this segment.</p>
             {% endfor %}   
         </div>
     </div>
@@ -31,13 +33,15 @@
         <div class="list-brands">
             {% for brand in premium_brands %}
             <div class="list-brands__item">
-                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products.url_name}}&brand={{brand.name}}">
                     <div class="list-brands__image">
                     <img src="{{brand.image.url}}" alt="">
                 </div>
                 <p class="list-brands__brand-name">{{brand.name}}</p>
                 </a>
             </div>
+            {% empty %}
+                <p class="list-brands__brand-name">No brands available in this segment.</p>
             {% endfor %}   
         </div>
     </div>
@@ -48,13 +52,15 @@
         <div class="list-brands">
             {% for brand in super_premium_brands %}
             <div class="list-brands__item">
-                <a href="{% url 'products' %}?type_of_products={{type_of_products}}&brand={{brand.name}}">
+                <a href="{% url 'products' %}?type_of_products={{type_of_products.url_name}}&brand={{brand.name}}">
                     <div class="list-brands__image">
                     <img src="{{brand.image.url}}" alt="">
                 </div>
                 <p class="list-brands__brand-name">{{brand.name}}</p>
                 </a>
             </div>
+            {% empty %}
+                <p class="list-brands__brand-name">No brands available in this segment.</p>
             {% endfor %}  
         </div>
     </div>

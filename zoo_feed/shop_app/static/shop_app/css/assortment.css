@@ -5,7 +5,7 @@ h1, h2{
 h1{
     background-color: #ffb824;
     font-size: 32px;
-    width: 350px;
+    max-width: 450px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -58,10 +58,11 @@ h1{
 .list-brands{
     max-width: 1180px;
     margin: 20px auto 0 auto;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    gap: 15px;
-    justify-content: space-between;
+    /* display: grid;
+    grid-template-columns: auto auto auto auto; */
+    display: flex;
+    gap: 60px;
+    justify-content: center;
  
 }
 
@@ -85,6 +86,7 @@ h1{
     align-items: center;
     justify-content: center;
     margin: 0 auto;
+    overflow: hidden;
    
 }
 
@@ -178,22 +180,11 @@ font-size: 16px;
 text-align: center;
 }
 
-@media (max-width:999px){
-    .list-brands{
-        grid-template-columns: auto auto auto;
-        justify-content: space-evenly;
-    }
-  
-}
 
 
 @media (max-width:767px){
     .list-brands{
-        grid-template-columns: auto auto;
-    }
-
-    .list-brands{
-        gap: 10px;
+        flex-wrap: wrap;
     }
 
     .consultation-form-assortment-page textarea, .consultation-form-assortment-page input{
@@ -211,18 +202,8 @@ text-align: center;
 }
 @media (max-width:479px){
 
-    .list-brands__image{
-        width: 165px;
-        height: 165px;
-    }
-
-    .list-brands__brand-name{
-        margin-top: 8px;
-        font-size: 16px;
-    }
-
     h1{
-        font-size: 28.5px;
+        font-size: 22px;
         width: 260px;
         height: 40px;
     }
@@ -238,17 +219,5 @@ text-align: center;
         
     }
     
-
-}
-
-
-@media (max-width:359px){
-    .list-brands__image{
-        width: 120px;
-        height: 120px;
-    }
-    .list-brands{
-        gap: 5px;
-    }
 
 }

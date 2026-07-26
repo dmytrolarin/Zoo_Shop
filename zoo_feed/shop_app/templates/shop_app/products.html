@@ -9,8 +9,8 @@
 
 {% block content %}
     <div class="top-block">
-        <h1>{{type_of_products}}</h1>
-        <img class="top-block__img" src="{{type_of_products.image.url}}" alt="">
+        <h1>{{title}}</h1>
+        <div class="top-block__img"><img class="" src="{{brand.image.url}}" alt=""></div>
     </div>
    
 
@@ -25,12 +25,12 @@
             <span>Filters</span>  <button class="filter-close-icon"><ion-icon name="chevron-back-outline"></ion-icon></button>
         </div>
         <div class="filters__body">
-            <div class="filters__products-types">
+            <!-- <div class="filters__products-types">
                 <span class="selected">Dog food</span>
                 <a>Cat food</a>
                 <a>Wet food</a>
                 <a>Care and hygiene</a>
-            </div>
+            </div> -->
             <div class="filters__parametres">
                 {% for fg in filter_groups %}
                         <div class="parameter">

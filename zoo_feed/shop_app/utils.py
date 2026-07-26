@@ -128,9 +128,9 @@ def handle_order(post_data, session_key):
         if post_data.get('order-receiving') == 'pickup':
             order_receiving_string = 'Pickup'
         elif post_data.get('order-receiving') == 'ukrposhta':
-            order_receiving_string = f"Ukrposhta.\nPostal code: {post_data.get('ukrposhta_index')}"
+            order_receiving_string = f"Ukr Post.\nPostal code: {post_data.get('ukrposhta_index')}"
         elif post_data.get('order-receiving') == 'nova_poshta':
-            order_receiving_string = "Nova Poshta."
+            order_receiving_string = "Nova Post."
         elif post_data.get('order-receiving') == 'justin':
             order_receiving_string = "Justin."
         if post_data.get('order-receiving') == 'justin' or post_data.get('order-receiving') == 'nova_poshta':

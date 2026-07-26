@@ -24,7 +24,7 @@ def show_assortment_page(request):
     type_of_products = request.GET.get('type_of_products')
     # Try to get the product type from the URL parameter.
     try:
-        type_of_products_id = TypeOfProduct.objects.get(url_name = type_of_products)
+        type_of_products_id = type_of_products = TypeOfProduct.objects.get(url_name = type_of_products)
     except TypeOfProduct.DoesNotExist:
         return redirect('home')
     # Get brands for the selected product type.
@@ -50,7 +50,7 @@ def show_products_page(request):
     # Try to get the product type and brand from the URL parameters.
     try:
         type_of_products_id = TypeOfProduct.objects.get(url_name = type_of_products)
-        brand_id = Brand.objects.get(name = brand)
+        brand_id = brand =Brand.objects.get(name = brand)
     except (TypeOfProduct.DoesNotExist, Brand.DoesNotExist):
         return redirect('home')
     # Filter products by brand and type.
@@ -103,7 +103,7 @@ def show_products_page(request):
         filter_items += [FilterItem.objects.filter(filter_group_id = fg.pk)]
     
     type_of_products_object = TypeOfProduct.objects.get(url_name=type_of_products)
-    context={'title':f'{type_of_products_object} - {brand} ', 
+    context={'title':f'{brand} - {type_of_products_object}', 
              'type_of_products':type_of_products_object,
              'products': products, 
              'product_packings':product_packings,
@@ -117,7 +117,8 @@ def show_products_page(request):
              'max_price':max_price,
              'absolute_min_price':absolute_min_price,
              'absolute_max_price':absolute_max_price,
-             'session_key': request.session.session_key
+             'session_key': request.session.session_key,
+             'brand': brand
              }
     
     if request.method == 'POST':

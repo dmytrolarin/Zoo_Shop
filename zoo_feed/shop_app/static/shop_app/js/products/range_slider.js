@@ -2,11 +2,22 @@ const priceFields = document.querySelectorAll(".inputs-prices input");
 const rangeInput = document.querySelectorAll(".range-input input");
 const progress = document.querySelector(".slider .progress");
 
-let minVal = parseInt(priceFields[0].value);
-let maxVal = parseInt(priceFields[1].value);
-const difference = rangeInput[0].max - rangeInput[0].min;
-progress.style.left = ((minVal- difference) / (rangeInput[0].max - difference) ) * 100 + "%";
-progress.style.right = 100 - ((maxVal - difference) / (rangeInput[1].max- difference)) * 100 + "%";
+function updateProgress(minValue, maxValue) {
+  const absoluteMin = Number(rangeInput[0].min);
+  const absoluteMax = Number(rangeInput[0].max);
+  const rangeSize = absoluteMax - absoluteMin;
+
+  if (rangeSize <= 0) {
+    progress.style.left = "0%";
+    progress.style.right = "0%";
+    return;
+  }
+
+  progress.style.left = ((minValue - absoluteMin) / rangeSize) * 100 + "%";
+  progress.style.right = 100 - ((maxValue - absoluteMin) / rangeSize) * 100 + "%";
+}
+
+updateProgress(Number(priceFields[0].value), Number(priceFields[1].value));
 
 priceFields.forEach((input) => {
   input.addEventListener("input", (event) => {
@@ -14,14 +25,12 @@ priceFields.forEach((input) => {
     let maxVal = parseInt(priceFields[1].value);
 
     if ((maxVal - minVal >= 0) && (maxVal <= rangeInput[0].max) && (rangeInput[0].min <= minVal)) {
-      const difference = rangeInput[0].max - rangeInput[0].min;
       if (event.target.className === "price-min") {
         rangeInput[0].value = minVal;
-        progress.style.left = ((minVal- difference) / (rangeInput[0].max - difference) ) * 100 + "%";
       } else {
         rangeInput[1].value = maxVal;
-        progress.style.right = 100 - ((maxVal - difference) / (rangeInput[1].max- difference)) * 100 + "%";
       }
+      updateProgress(minVal, maxVal);
     }
   });
 });
@@ -40,9 +49,7 @@ rangeInput.forEach((input) => {
     } else {
       priceFields[0].value = minVal;
       priceFields[1].value = maxVal;
-      const difference = rangeInput[0].max - rangeInput[0].min;
-      progress.style.left = ((minVal- difference) / (rangeInput[0].max - difference) ) * 100 + "%";
-      progress.style.right = 100 - ((maxVal - difference) / (rangeInput[1].max- difference)) * 100 + "%";
+      updateProgress(minVal, maxVal);
     }
   });
 });
