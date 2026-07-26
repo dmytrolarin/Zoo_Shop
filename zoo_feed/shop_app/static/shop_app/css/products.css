@@ -49,30 +49,36 @@ body.lock{
 }
 
 .button-filters{
-    background-color: #10eaea;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
     position: fixed;
-    left: 20px;
-    bottom: 10px;
-    border: 2px solid black;
-    z-index: 10;
-    transition: background-color 0.2s ease;
+    left: 50px;
+    bottom: 50px;
+
+    width: 85px;
+    height: 85px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border: 2px solid #0fa7b3;
+    border-radius: 50%;
+    background: #fff;
+    color: #0fa7b3;
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(0,0,0,.4);
+    transition: background-color .2s, color .2s;
 }
 
 .button-filters:hover{
-    background-color: #00ffff;
+    background: #0fa7b3;
+    color: #fff;
 }
 
-
-
 .button-filters img{
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
 }
 
 .filters{
