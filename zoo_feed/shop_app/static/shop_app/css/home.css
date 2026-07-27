@@ -9,7 +9,7 @@ h1, h2{
   display: flex;
   justify-content: space-between;
   flex: 1 1 auto;
-  /* width: 100%; */
+  width: 100%;
 }
 
 /* Text */
@@ -53,6 +53,12 @@ h1, h2{
 }
 
 /* Slider */
+
+.block-advert__slider{
+  display: flex;
+  justify-content: center;
+}
+
 .sim-slider img {
   width: 100%;
   height: 100%;
@@ -62,8 +68,9 @@ h1, h2{
 }
 
 .sim-slider {
-  width: min(100%, 620px);
-  margin: 20px auto;
+  width: 620px;
+  /* width: min(100%, 620px); */
+  margin: 20px 0;
   border: 1px solid rgba(93, 180, 180, 0.25);
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(227, 249, 249, 0.9));
   aspect-ratio: 16 / 9;

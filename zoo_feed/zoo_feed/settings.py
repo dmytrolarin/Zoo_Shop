@@ -77,26 +77,26 @@ WSGI_APPLICATION = 'zoo_feed.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if ENV == "development":
-    # Local (development)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
+# if ENV == "development":
+# Local (development)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # Production (hosting)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'Zoofeed$mysqlzoofeed',
-            'USER': 'Zoofeed',
-            'PASSWORD': os.getenv("DB_PASSWORD"),
-            'HOST': 'Zoofeed.mysql.pythonanywhere-services.com',
-            'PORT': '3306',
-        }
-    }
+}
+# else:
+    # # Production (hosting)
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': 'Zoofeed$mysqlzoofeed',
+    #         'USER': 'Zoofeed',
+    #         'PASSWORD': os.getenv("DB_PASSWORD"),
+    #         'HOST': 'Zoofeed.mysql.pythonanywhere-services.com',
+    #         'PORT': '3306',
+    #     }
+    # }
 
 
 # Password validation
